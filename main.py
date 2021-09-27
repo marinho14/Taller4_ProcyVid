@@ -1,19 +1,18 @@
-# This is a sample Python script.
+# Se importan las librerias necesarias
 import cv2
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-from Quadrilateral import Quadrilateral as ql
-from Corners import DetectCorners as DC
+from Quadrilateral import Quadrilateral as ql  ## Se importa la clase Quadrilateral
+from Corners import DetectCorners as DC        ## Se omporta la funcion para detectar esquinas
 
 
-# Press the green button in the gutter to run the script.
+# Se define el main
 if __name__ == '__main__':
-   imagen= ql(500)
-   imagen= imagen.Generate()
-   draw=DC(imagen, 1)
-   cv2.imshow("Image1", imagen)
-   cv2.imshow("Image", draw)
+   N=500         ## Se define el tamaño de la imagen cuadrada NxN
+   imagen= ql(N)    ## Se crea una clase
+   imagen= imagen.Generate()  ## Se usa el metodo Generate para generar una imagen con una figura de 4 lados
+   draw=DC(imagen, 1)         ## Se usa la función detectar esquinas y se iguala a una imagen
+   cv2.imshow("Image1", imagen)  ## Se muestra la imagen generada en Generate()
+   cv2.imshow("Image", draw)     ## Se meusta la imagen con la detección de esquinas
    cv2.waitKey(0)
 
 
