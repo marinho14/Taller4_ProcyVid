@@ -1,5 +1,6 @@
 import numpy as np
 
+## Codigo otorgado por Julian Quiroga en clase, en donde se hace la transformada de Hough
 
 class Hough:
     def __init__(self, bw_edges):
