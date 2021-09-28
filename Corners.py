@@ -32,6 +32,7 @@ def DetectCorners(image):  ## Se define el metodo DetectCorners al cual le ingre
     image_draw = np.copy(image)  ## Se define una copia de la iamgen original
     pendiente = []  ## Se crean listas vacias
     corte = []
+    puntos= np.empty((2,2),dtype=int)
     i = 0
     for peak in peaks: ## Se recorre peaks, este for se hara de acuerdo a la cantidad de lineas que encuentre
         rho = peak[0]  ## Se define rho
@@ -66,6 +67,7 @@ def DetectCorners(image):  ## Se define el metodo DetectCorners al cual le ingre
             else:
                 image_draw = cv2.line(image_draw, (x1, y1), (x2, y2), [0, 0, 0], thickness=2)
 
+
     for i in range(len(corte)):  ## Se recorre la lista de cortes y pendientes
         for j in range(i, len(corte)):
             ## Se definen parametros de la resta de los cortes y pendientes
@@ -82,6 +84,9 @@ def DetectCorners(image):  ## Se define el metodo DetectCorners al cual le ingre
                 ## lejanas al poligono ya que las lineas se expanden por toda la imagen
                 dist = np.sqrt(((puntos_poligono - punto) ** 2).sum(axis=0)).min()
                 if dist < 10: ## Solo se entra si la distancia es menor a un valor, esta se encontro por sintonizacion
+                    puntos = np.append(puntos, [[int(X) , int(Y)]],axis=0)
                     image_draw = cv2.circle(image_draw, (int(X), int(Y)), 10, (45, 0, 0), 2) ## Se grafica un circulo en donde se encontro la intersección
-
-    return image_draw  ## Se retorna la imagen con las lineas y las esquinas encerradas
+                    #print(X,Y)
+    puntos =np.delete(puntos,0, axis=0)
+    puntos = np.delete(puntos, 0, axis=0)
+    return image_draw,puntos  ## Se retorna la imagen con las lineas y las esquinas encerradas y sus posiciones
