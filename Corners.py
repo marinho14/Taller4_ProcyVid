@@ -25,7 +25,7 @@ def DetectCorners(image):  ## Se define el metodo DetectCorners al cual le ingre
     ## Se definen parametros necesarios para encontrar los picos, los cuales se calcularon mediante sintonización
     acc_thresh = 60
     N_peaks = 10  ## Se define un maximo de 10 esquinas por encontrar por imagen
-    nhood = [60, 60]
+    nhood = [50, 50]
     peaks = hough.find_peaks(accumulator, nhood, acc_thresh, N_peaks)  ## Se usa el metodo Find_peaks
 
     _, cols = image.shape[:2]
